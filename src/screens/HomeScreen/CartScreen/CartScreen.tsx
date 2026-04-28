@@ -10,14 +10,14 @@ import {
 } from 'react-native';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { MyBackButton, MyButton } from '../../components';
+import { MyBackButton, MyButton } from '../../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addToCart,
   clearCart,
   removeFromCart,
-} from '../../redux/features/CartSlice';
-import { AppDispatch, RootState } from '../../redux/store';
+} from '../../../redux/features/CartSlice';
+import { AppDispatch, RootState } from '../../../redux/store';
 
 const CartScreen = () => {
   // hooks

@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProducts } from '../../redux/features/ProductsSlice';
-import { AppDispatch, RootState } from '../../redux/store';
+import { getAllProducts } from '../../../redux/features/ProductsSlice';
+import { AppDispatch, RootState } from '../../../redux/store';
 
 const Home = () => {
   // hooks

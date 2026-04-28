@@ -1,5 +1,5 @@
-export { default as CartScreen } from './CartScreen/CartScreen';
-export { default as CounterScreen } from './CounterScreen/CounterScreen';
-export { default as Home } from './Home/Home';
-export { default as Login } from './Login/Login';
-export { default as SingleProduct } from './SingleProduct/SingleProduct';
+export { default as CartScreen } from './HomeScreen/CartScreen/CartScreen';
+export { default as CounterScreen } from './HomeScreen/CounterScreen/CounterScreen';
+export { default as Home } from './HomeScreen/Home/Home';
+export { default as Login } from './AuthScreen/Login/Login';
+export { default as SingleProduct } from './HomeScreen/SingleProduct/SingleProduct';

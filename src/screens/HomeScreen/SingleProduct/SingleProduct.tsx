@@ -7,11 +7,11 @@ import {
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { MyButton, MyBackButton } from '../../components/index';
+import { MyButton, MyBackButton } from '../../../components/index';
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '../../redux/features/CartSlice';
-import { AppDispatch, RootState } from '../../redux/store';
+import { addToCart, removeFromCart } from '../../../redux/features/CartSlice';
+import { AppDispatch, RootState } from '../../../redux/store';
 
 const SingleProduct = () => {
   // states

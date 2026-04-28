@@ -1,10 +1,10 @@
 import { Text, TextInput, View } from 'react-native';
 import React, { useState } from 'react';
-import { MyButton } from '../../components';
+import { MyButton } from '../../../components';
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../redux/features/AuthSlice';
-import { AppDispatch, RootState } from '../../redux/store';
+import { login } from '../../../redux/features/AuthSlice';
+import { AppDispatch, RootState } from '../../../redux/store';
 
 const Login = () => {
   // states

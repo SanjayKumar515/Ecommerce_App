@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
 import React from 'react';
-import { MyButton } from '../../components';
+import { MyButton } from '../../../components';
 import styles from './styles';
 
 const CounterScreen = () => {
