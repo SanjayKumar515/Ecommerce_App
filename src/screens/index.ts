@@ -1,5 +1,11 @@
-export { default as CartScreen } from './HomeScreen/CartScreen/CartScreen';
-export { default as CounterScreen } from './HomeScreen/CounterScreen/CounterScreen';
-export { default as Home } from './HomeScreen/Home/Home';
-export { default as Login } from './AuthScreen/Login/Login';
-export { default as SingleProduct } from './HomeScreen/SingleProduct/SingleProduct';
+// App stack screens
+export { default as CartScreen } from './AppStack/CartScreen/CartScreen';
+export { default as CounterScreen } from './AppStack/CounterScreen/CounterScreen';
+export { default as Home } from './AppStack/Home/Home';
+export { default as SingleProduct } from './AppStack/SingleProduct/SingleProduct';
+
+// Auth stack screens
+export { default as Login } from './AuthStack/Login/Login';
+export { default as Register } from './AuthStack/Register/Register';
+export { default as ForgotPassword } from './AuthStack/ForgotPassword/ForgotPassword';
+
