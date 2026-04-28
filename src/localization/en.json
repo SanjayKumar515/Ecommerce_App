@@ -1,0 +1,27 @@
+{
+  "translation": {
+    "home": "Home",
+    "categories": "Categories",
+    "account": "Account",
+    "cart": "Cart",
+    "top_categories": "Top Categories",
+    "trending_now": "Trending Now",
+    "orders": "Orders",
+    "wishlist": "Wishlist",
+    "coupons": "Coupons",
+    "help_center": "Help Center",
+    "account_settings": "Account Settings",
+    "edit_profile": "Edit Profile",
+    "saved_addresses": "Saved Addresses",
+    "select_language": "Select Language",
+    "notification_settings": "Notification Settings",
+    "payments_cards": "Payments & Cards",
+    "saved_cards_wallet": "Saved Cards & Wallet",
+    "privacy_policy": "Privacy Policy",
+    "logout": "Log Out",
+    "logout_confirm": "Are you sure you want to log out?",
+    "cancel": "Cancel",
+    "yes_logout": "Yes, Logout",
+    "language_modal_title": "Choose Language"
+  }
+}

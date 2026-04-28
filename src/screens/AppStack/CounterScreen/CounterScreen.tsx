@@ -1,14 +1,17 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { Text, useTheme } from 'react-native-paper';
 import React from 'react';
-import { MyButton } from '../../../components';
+import { CustomButton } from '../../../components';
 import styles from './styles';
 
 const CounterScreen = () => {
+  const theme = useTheme();
+
   return (
-    <View style={ styles.container }>
+    <View style={ [styles.container, { backgroundColor: theme.colors.background }] }>
       <Text style={ styles.title }>0</Text>
-      <MyButton title="Add" onPress={ () => { } } />
-      <MyButton title="Minus" onPress={ () => { } } />
+      <CustomButton title="Add" onPress={ () => { } } />
+      <CustomButton title="Minus" onPress={ () => { } } />
     </View>
   );
 };

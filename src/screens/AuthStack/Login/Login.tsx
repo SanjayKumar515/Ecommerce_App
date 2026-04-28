@@ -1,19 +1,21 @@
-import { Text, TextInput, View } from 'react-native';
+import { Image, View } from 'react-native';
+import { Text, useTheme } from 'react-native-paper';
 import React, { useState } from 'react';
-import { MyButton } from '../../../components';
+import { CustomButton, CustomTextInput } from '../../../components';
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../redux/features/AuthSlice';
 import { AppDispatch, RootState } from '../../../redux/store';
+import Images from '../../../constant/images';
 
 const Login = () => {
   // states
-  const [ email, setEmail ] = useState( '' );
-  const [ password, setPassword ] = useState( '' );
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   // hooks
   const dispatch = useDispatch<AppDispatch>();
-  const { userData, isLoading } = useSelector( ( state: RootState ) => state.auth );
+  const { userData, isLoading } = useSelector((state: RootState) => state.auth);
 
   // functions
   const handlingLogin = () => {
@@ -21,29 +23,34 @@ const Login = () => {
       username: email,
       password: password,
     };
-    console.log( 'params:', params );
-    dispatch( login( params ) );
+    console.log('params:', params);
+    dispatch(login(params));
   };
 
+  const theme = useTheme();
+
   return (
-    <View style={ styles.container }>
-      <Text style={ styles.title }>Login</Text>
-      <TextInput
-        value={ email }
-        placeholder="Enter Email"
-        onChangeText={ setEmail }
-        style={ styles.input }
-        placeholderTextColor="grey"
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
+      <Image source={Images.ic_logo} style={styles.logo} />
+
+      <Text style={styles.title}>Login</Text>
+      <CustomTextInput
+        value={email}
+        label="Enter Email"
+        onChangeText={setEmail}
+        style={styles.input}
         autoCapitalize="none"
       />
-      <TextInput
-        value={ password }
-        placeholder="Enter Password"
-        onChangeText={ setPassword }
-        style={ styles.input }
-        placeholderTextColor="grey"
+      <CustomTextInput
+        value={password}
+        label="Enter Password"
+        onChangeText={setPassword}
+        style={styles.input}
+        secureTextEntry
       />
-      <MyButton title="Login" onPress={ handlingLogin } />
+      <CustomButton title="Login" onPress={handlingLogin} />
     </View>
   );
 };

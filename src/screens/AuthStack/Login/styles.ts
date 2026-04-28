@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,16 +9,17 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 36,
-    color: '#000',
     fontWeight: 'bold',
     textAlign: 'center',
   },
   input: {
-    height: 45,
-    borderWidth: 1,
-    borderRadius: 25,
-    borderColor: 'coral',
-    paddingHorizontal: 20,
+    marginBottom: 5,
+  },
+  logo: {
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
+    alignSelf: 'center',
   },
 });
 

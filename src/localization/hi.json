@@ -1,0 +1,27 @@
+{
+  "translation": {
+    "home": "होम",
+    "categories": "कैटेगरी",
+    "account": "अकाउंट",
+    "cart": "कार्ट",
+    "top_categories": "मुख्य कैटेगरी",
+    "trending_now": "ट्रेंडिंग प्रोडक्ट्स",
+    "orders": "ऑर्डर्स",
+    "wishlist": "विशलिस्ट",
+    "coupons": "कूपन",
+    "help_center": "सहायता केंद्र",
+    "account_settings": "अकाउंट सेटिंग्स",
+    "edit_profile": "प्रोफाइल बदलें",
+    "saved_addresses": "पते सुरक्षित करें",
+    "select_language": "भाषा चुनें",
+    "notification_settings": "सूचना सेटिंग्स",
+    "payments_cards": "पेमेंट और कार्ड",
+    "saved_cards_wallet": "सुरक्षित कार्ड और वॉलेट",
+    "privacy_policy": "गोपनीयता नीति",
+    "logout": "लॉग आउट",
+    "logout_confirm": "क्या आप लॉग आउट करना चाहते हैं?",
+    "cancel": "रद्द करें",
+    "yes_logout": "हाँ, लॉग आउट",
+    "language_modal_title": "भाषा चुनें"
+  }
+}

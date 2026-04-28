@@ -2,7 +2,6 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   box: {
-    backgroundColor: 'lightcoral',
     width: 45,
     height: 45,
     borderRadius: 25,

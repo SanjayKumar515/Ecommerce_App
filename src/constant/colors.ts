@@ -1,7 +1,7 @@
 const Colors = {
   //color scheme -
   PRIMARY: {
-    100: '#141a23',
+    100: '#d9a3f9ff',
     200: '#143b46',
     300: '#FFFFFF',
     400: '#000000',

@@ -1,47 +1,106 @@
 import { StyleSheet } from 'react-native';
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import { Fonts } from '../../../constant';
 
-const styles = StyleSheet.create( {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: '5%',
-    backgroundColor: '#FFF'
   },
-  img: {
-    width: '100%',
-    height: 200,
+  bannerWrapper: {
+    height: hp(24),
+    marginVertical: hp(1),
+  },
+  bannerImg: {
+    width: wp(90),
+    height: hp(22),
     resizeMode: 'cover',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderRadius: hp(2),
+    alignSelf: 'center',
   },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  price: {
-    fontSize: 18,
-    marginTop: 10,
-  },
-  cardBox: {
-    marginBottom: 30,
-    paddingBottom: 20,
-    borderRadius: 20,
-    backgroundColor: 'white',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
-  },
-  footer: {
+  pagination: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: wp(1.5),
+    marginTop: hp(0.5),
   },
-} );
+  dot: {
+    width: wp(2),
+    height: wp(2),
+    borderRadius: wp(1),
+  },
+  catSection: {
+    paddingVertical: hp(2),
+    borderBottomWidth: 1,
+    borderColor: '#eee',
+  },
+  sectionTitle: {
+    fontSize: RFValue(16),
+    fontFamily: Fonts.Bold,
+    paddingLeft: wp(5),
+    marginBottom: hp(1.5),
+  },
+  catScroll: {
+    paddingHorizontal: wp(5),
+    gap: wp(6),
+  },
+  catItem: {
+    alignItems: 'center',
+  },
+  iconRing: {
+    width: wp(15),
+    height: wp(15),
+    borderRadius: wp(7.5),
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 2,
+  },
+  catIcon: {
+    width: wp(10),
+    height: wp(10),
+    resizeMode: 'contain',
+  },
+  catLabel: {
+    fontSize: RFValue(11),
+    fontFamily: Fonts.Medium,
+    marginTop: hp(0.8),
+  },
+  rowWrapper: {
+    justifyContent: 'space-between',
+    paddingHorizontal: wp(5),
+    marginTop: hp(1.5),
+  },
+  productCard: {
+    width: wp(43),
+    borderRadius: wp(3),
+    padding: wp(2),
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+  },
+  productThumb: {
+    width: wp(45),
+    height: hp(18),
+    resizeMode: 'contain',
+  },
+  productMeta: {
+    marginTop: hp(1),
+  },
+  productTitle: {
+    fontSize: RFValue(13),
+    fontFamily: Fonts.Medium,
+  },
+  productPrice: {
+    fontSize: RFValue(14),
+    fontFamily: Fonts.Bold,
+    marginTop: hp(0.5),
+  },
+});
 
 export default styles;

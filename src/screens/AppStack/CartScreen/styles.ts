@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: 'white',
     paddingRight: 10,
     borderRadius: 10,
     shadowColor: '#000',
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
   btnBox: {
     width: 40,
     height: 40,
-    backgroundColor: 'lightgrey',
+    backgroundColor: 'grey', // Changed to grey to be visible in both themes, or we can leave lightgrey
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 25,
@@ -73,7 +72,6 @@ const styles = StyleSheet.create({
     flex: 0.2,
     gap: 10,
     paddingHorizontal: '5%',
-    backgroundColor: 'white',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 35,
     alignItems: 'center',
