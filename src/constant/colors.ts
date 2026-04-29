@@ -1,13 +1,14 @@
 const Colors = {
   //color scheme -
   PRIMARY: {
-    100: '#d9a3f9ff',
+    100: '#a9e8f3ff',
     200: '#143b46',
     300: '#FFFFFF',
     400: '#000000',
     500: '#5a5959',
     600: '#eff1fb',
     700: '#dadee9',
+    800: '#1f86c2ff',
   },
   SECONDARY: {
     100: '#321a8c', //Enable

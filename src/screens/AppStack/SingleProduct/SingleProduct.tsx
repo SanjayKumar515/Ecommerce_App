@@ -35,6 +35,7 @@ const SingleProduct = () => {
       }
     };
     itemChecking();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ cartData ] );
 
   return (

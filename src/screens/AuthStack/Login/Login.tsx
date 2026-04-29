@@ -10,12 +10,12 @@ import Images from '../../../constant/images';
 
 const Login = () => {
   // states
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [ email, setEmail ] = useState( 'emilys' );
+  const [ password, setPassword ] = useState( 'emilyspass' );
 
   // hooks
   const dispatch = useDispatch<AppDispatch>();
-  const { userData, isLoading } = useSelector((state: RootState) => state.auth);
+  const { userData, isLoading } = useSelector( ( state: RootState ) => state.auth );
 
   // functions
   const handlingLogin = () => {
@@ -23,34 +23,34 @@ const Login = () => {
       username: email,
       password: password,
     };
-    console.log('params:', params);
-    dispatch(login(params));
+    console.log( 'params:', params );
+    dispatch( login( params ) );
   };
 
   const theme = useTheme();
 
   return (
     <View
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      style={ [ styles.container, { backgroundColor: theme.colors.background } ] }
     >
-      <Image source={Images.ic_logo} style={styles.logo} />
+      <Image source={ Images.ic_logo } style={ styles.logo } />
 
-      <Text style={styles.title}>Login</Text>
+      <Text style={ styles.title }>Login</Text>
       <CustomTextInput
-        value={email}
+        value={ email }
         label="Enter Email"
-        onChangeText={setEmail}
-        style={styles.input}
+        onChangeText={ setEmail }
+        style={ styles.input }
         autoCapitalize="none"
       />
       <CustomTextInput
-        value={password}
+        value={ password }
         label="Enter Password"
-        onChangeText={setPassword}
-        style={styles.input}
+        onChangeText={ setPassword }
+        style={ styles.input }
         secureTextEntry
       />
-      <CustomButton title="Login" onPress={handlingLogin} />
+      <CustomButton title="Login" onPress={ handlingLogin } />
     </View>
   );
 };

@@ -6,9 +6,10 @@ import {
   MD3DarkTheme as PaperDarkTheme,
   MD3LightTheme as PaperDefaultTheme,
 } from 'react-native-paper';
+import { Colors } from '../constant';
 
 // Brand Color
-const primaryColor = 'coral';
+const primaryColor = Colors.PRIMARY[ 800 ];
 
 export const LightTheme = {
   ...NavigationDefaultTheme,
