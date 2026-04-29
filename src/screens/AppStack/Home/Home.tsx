@@ -30,27 +30,59 @@ const BANNERS = [
 const CATEGORIES = [
   {
     id: '1',
-    title: 'Tech',
+    title: 'Electronics',
     icon: 'https://cdn-icons-png.flaticon.com/512/3659/3659899.png',
     slug: 'smartphones',
+    bg: '#E8F4FD',
   },
   {
     id: '2',
-    title: 'Clothing',
+    title: 'Fashion',
     icon: 'https://cdn-icons-png.flaticon.com/512/3050/3050230.png',
     slug: 'mens-shirts',
+    bg: '#FFF3E0',
   },
   {
     id: '3',
     title: 'Home',
     icon: 'https://cdn-icons-png.flaticon.com/512/2549/2549900.png',
     slug: 'furniture',
+    bg: '#E8F5E9',
   },
   {
     id: '4',
     title: 'Beauty',
     icon: 'https://cdn-icons-png.flaticon.com/512/194/194305.png',
     slug: 'beauty',
+    bg: '#FCE4EC',
+  },
+  {
+    id: '5',
+    title: 'Sports',
+    icon: 'https://cdn-icons-png.flaticon.com/512/857/857435.png',
+    slug: 'sports-accessories',
+    bg: '#EDE7F6',
+  },
+  {
+    id: '6',
+    title: 'Grocery',
+    icon: 'https://cdn-icons-png.flaticon.com/512/3724/3724788.png',
+    slug: 'groceries',
+    bg: '#E0F7FA',
+  },
+  {
+    id: '7',
+    title: 'Vehicles',
+    icon: 'https://cdn-icons-png.flaticon.com/512/1048/1048316.png',
+    slug: 'vehicle',
+    bg: '#FFF9C4',
+  },
+  {
+    id: '8',
+    title: 'More',
+    icon: 'https://cdn-icons-png.flaticon.com/512/10437/10437893.png',
+    slug: 'tops',
+    bg: '#F3E5F5',
   },
 ];
 
@@ -77,6 +109,7 @@ const Home = () => {
 
   useEffect( () => {
     dispatch( getAllProducts() );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] );
 
   // Auto-scroll: only scrolls, dots driven directly by Animated.Value
@@ -87,6 +120,7 @@ const Home = () => {
       bannerIndexRef.current = next;
     }, 3000 );
     return () => clearInterval( timer );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] );
 
   const filteredProducts = products?.products
@@ -147,6 +181,8 @@ const Home = () => {
 
   const HeaderComponents = () => (
     <View style={ { backgroundColor: theme.colors.background } }>
+
+
       {/* 1. Promo Banners */ }
       <View style={ styles.bannerWrapper }>
         <Animated.ScrollView
@@ -167,6 +203,7 @@ const Home = () => {
           } }
         >
           { BANNERS.map( ( item, i ) => (
+            // eslint-disable-next-line react-native/no-inline-styles
             <View key={ i } style={ { width: SLIDER_WIDTH, alignItems: 'center' } }>
               <Image
                 source={ { uri: item } }
@@ -214,63 +251,17 @@ const Home = () => {
         </View>
       </View>
 
-      {/* 2. Round Category Chips (Zomato) */ }
-      <View
-        style={ [ styles.catSection, { backgroundColor: theme.colors.surface } ] }
-      >
-        <Text style={ [ styles.sectionTitle, { color: theme.colors.onSurface } ] }>
-          { t( 'top_categories' ) }
-        </Text>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={ false }
-          contentContainerStyle={ styles.catScroll }
-        >
-          { CATEGORIES.map( cat => (
-            <Pressable
-              key={ cat.id }
-              style={ styles.catItem }
-              onPress={ () =>
-                //@ts-ignore
-                navigate(
-                  'Categories' as never,
-                  { screen: 'Categories' } as never,
-                )
-              }
-            >
-              <View
-                style={ [
-                  styles.iconRing,
-                  { backgroundColor: theme.colors.background },
-                ] }
-              >
-                <Image source={ { uri: cat.icon } } style={ styles.catIcon } />
-              </View>
-              <Text
-                style={ [
-                  styles.catLabel,
-                  { color: theme.colors.onSurfaceVariant },
-                ] }
-              >
-                { cat.title }
-              </Text>
-            </Pressable>
-          ) ) }
-        </ScrollView>
-      </View>
 
-      <Text
-        style={ [
-          styles.sectionTitle,
-          {
-            color: theme.colors.onSurface,
-            paddingLeft: wp( 5 ),
-            marginTop: hp( 2 ),
-          },
-        ] }
-      >
-        { t( 'trending_now' ) }
-      </Text>
+
+      {/* Trending Section Header */ }
+      <View style={ styles.trendingHeader }>
+        <Text style={ [ styles.sectionTitle, { color: theme.colors.onSurface } ] }>
+          { t( 'trending_now' ) }
+        </Text>
+        <Pressable>
+          <Text style={ styles.viewAll }>View All</Text>
+        </Pressable>
+      </View>
     </View>
   );
 
