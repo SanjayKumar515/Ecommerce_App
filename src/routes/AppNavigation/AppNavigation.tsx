@@ -12,10 +12,6 @@ const Stack = createNativeStackNavigator();
 
 const AppNavigation = ( { theme }: { theme: any } ) => {
   const { userData } = useSelector( ( state: RootState ) => state.auth );
-  console.log(
-    '🚀 ~ file: AppNavigation.js:17 ~ AppNavigation ~ userData:',
-    userData,
-  );
   return (
     <SafeAreaView
       style={ { flex: 1, backgroundColor: Colors.PRIMARY[ 100 ] } }

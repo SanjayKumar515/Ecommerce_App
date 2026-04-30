@@ -7,22 +7,28 @@ import {
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { CustomButton, MyBackButton } from '../../../components/index';
+import { CustomButton, MyBackButton, Skeleton } from '../../../components/index';
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../../../redux/features/CartSlice';
 import { AppDispatch, RootState } from '../../../redux/store';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const SingleProduct = () => {
   // states
   const [ currentItem, setCurrentItem ] = useState<any>( {} );
+  const [ imageLoading, setImageLoading ] = useState( true );
+
   // hooks
   const {
     params: { Product },
   } = useRoute<any>();
   const { navigate } = useNavigation();
   const dispatch = useDispatch<AppDispatch>();
-  const { cartData, totalAmount } = useSelector( ( state: RootState ) => state.cartItems );
+  const { cartData } = useSelector( ( state: RootState ) => state.cartItems );
 
   // life cycle
   useEffect( () => {
@@ -35,16 +41,26 @@ const SingleProduct = () => {
       }
     };
     itemChecking();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ cartData ] );
+  }, [ cartData, Product.id ] );
 
   return (
     <ScrollView style={ styles.container } showsVerticalScrollIndicator={ false }>
-
       <MyBackButton />
       {/* Card */ }
       <View style={ styles.cardBox }>
-        <Image source={ { uri: Product.thumbnail } } style={ styles.img } />
+        { imageLoading && (
+          <Skeleton
+            width={ wp( 90 ) }
+            height={ hp( 30 ) }
+            borderRadius={ wp( 4 ) }
+            style={ { alignSelf: 'center' } }
+          />
+        ) }
+        <Image
+          source={ { uri: Product.thumbnail } }
+          style={ [ styles.img, imageLoading && { width: 0, height: 0 } ] }
+          onLoad={ () => setImageLoading( false ) }
+        />
         <View style={ styles.textBox }>
           <Text style={ styles.title }>{ Product.title }</Text>
           <Text style={ styles.price }>${ Product.price }</Text>

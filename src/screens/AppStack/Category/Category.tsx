@@ -14,6 +14,7 @@ import {
 import { Fonts } from '../../../constant';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
+import { Skeleton } from '../../../components';
 
 const FALLBACK_IMG = 'https://cdn-icons-png.flaticon.com/512/679/679821.png';
 
@@ -161,6 +162,21 @@ const CategoryScreen = () => {
     );
   };
 
+  const CategorySkeleton = () => (
+    <View style={ styles.categoryBtn }>
+      <Skeleton width={ wp( 12 ) } height={ wp( 12 ) } borderRadius={ wp( 6 ) } />
+      <Skeleton width={ wp( 14 ) } height={ hp( 1.5 ) } style={ { marginTop: hp( 1 ) } } />
+    </View>
+  );
+
+  const ProductSkeleton = () => (
+    <View style={ [ styles.productCard, { backgroundColor: theme.colors.surface } ] }>
+      <Skeleton width="100%" height={ hp( 10 ) } borderRadius={ wp( 2 ) } />
+      <Skeleton width="80%" height={ hp( 1.5 ) } style={ { marginTop: hp( 1 ) } } />
+      <Skeleton width="40%" height={ hp( 1.5 ) } style={ { marginTop: hp( 0.5 ) } } />
+    </View>
+  );
+
   return (
     <View
       style={ [
@@ -184,9 +200,9 @@ const CategoryScreen = () => {
           ] }
         >
           <FlatList
-            data={ categories }
-            renderItem={ renderCategoryItem }
-            keyExtractor={ ( item ) => item.slug }
+            data={ categories.length > 0 ? categories : [ 1, 2, 3, 4, 5, 6, 7, 8 ] }
+            renderItem={ categories.length > 0 ? renderCategoryItem : () => <CategorySkeleton /> }
+            keyExtractor={ ( item, index ) => categories.length > 0 ? item.slug : index.toString() }
             showsVerticalScrollIndicator={ false }
           />
         </View>
@@ -195,23 +211,15 @@ const CategoryScreen = () => {
         <View
           style={ [ styles.rightPane, { backgroundColor: theme.colors.surface } ] }
         >
-          { isLoading ? (
-            <View style={ styles.loaderContainer }>
-              <Text style={ { color: theme.colors.onSurfaceVariant } }>
-                Loading...
-              </Text>
-            </View>
-          ) : (
-            <FlatList
-              data={ products }
-              renderItem={ renderProductItem }
-              keyExtractor={ ( item ) => item.id.toString() }
-              numColumns={ 2 }
-              showsVerticalScrollIndicator={ false }
-              columnWrapperStyle={ styles.row }
-              contentContainerStyle={ { padding: wp( 2 ) } }
-            />
-          ) }
+          <FlatList
+            data={ isLoading ? [ 1, 2, 3, 4, 5, 6 ] : products }
+            renderItem={ isLoading ? () => <ProductSkeleton /> : renderProductItem }
+            keyExtractor={ ( item, index ) => isLoading ? index.toString() : item.id.toString() }
+            numColumns={ 2 }
+            showsVerticalScrollIndicator={ false }
+            columnWrapperStyle={ styles.row }
+            contentContainerStyle={ { padding: wp( 2 ) } }
+          />
         </View>
       </View>
     </View>
