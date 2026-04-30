@@ -139,7 +139,11 @@ const Account = () => {
             title={t('wishlist')} 
             onPress={() => navigate('Wishlist' as never)}
           />
-          <ShortcutItem icon="ticket-outline" title={t('coupons')} />
+          <ShortcutItem 
+            icon="ticket-outline" 
+            title={t('coupons')} 
+            onPress={() => navigate('Coupons' as never)}
+          />
           <ShortcutItem 
             icon="help-circle-outline" 
             title={t('help_center')} 

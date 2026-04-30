@@ -7,6 +7,7 @@ export { default as CategoryScreen } from './AppStack/Category/Category';
 export { default as WishlistScreen } from './AppStack/Wishlist/WishlistScreen';
 export { default as OrderScreen } from './AppStack/Orders/OrderScreen';
 export { default as HelpCenterScreen } from './AppStack/HelpCenter/HelpCenterScreen';
+export { default as CouponsScreen } from './AppStack/Coupons/CouponsScreen';
 
 // Auth stack screens
 export { default as Login } from './AuthStack/Login/Login';

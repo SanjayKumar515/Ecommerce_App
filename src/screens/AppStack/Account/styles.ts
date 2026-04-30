@@ -56,6 +56,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 1.5,
+    borderWidth: wp(0.3),
+    borderColor: '#dedcdcff',
   },
   shortcutTitle: {
     fontSize: RFValue(12),

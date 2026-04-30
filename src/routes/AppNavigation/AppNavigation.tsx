@@ -8,6 +8,7 @@ import {
   WishlistScreen,
   OrderScreen,
   HelpCenterScreen,
+  CouponsScreen,
 } from '../../screens';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
@@ -34,6 +35,7 @@ const AppNavigation = ({ theme }: { theme: any }) => {
               <Stack.Screen name="Wishlist" component={WishlistScreen} />
               <Stack.Screen name="Orders" component={OrderScreen} />
               <Stack.Screen name="HelpCenter" component={HelpCenterScreen} />
+              <Stack.Screen name="Coupons" component={CouponsScreen} />
             </Stack.Group>
           ) : (
             <Stack.Group>
