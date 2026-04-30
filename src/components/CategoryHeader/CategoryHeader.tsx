@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { View, Text, FlatList, Pressable, Image } from 'react-native';
 import styles from './CategoryHeader.style';
+import { Images } from '../../constant';
 
 const CategoryHeader = ({
   categories,
@@ -28,13 +29,12 @@ const CategoryHeader = ({
         onPress={() => setSelectedCategory(item.slug)}
       >
         <Image
-          source={{
-            uri: categoryImages[item.slug] ?? FALLBACK_CAT_IMG,
-          }}
-          style={[
-            styles.catIcon,
-            // { tintColor: isSelected ? theme.colors.primary : '#666' },
-          ]}
+          source={
+            categoryImages[item.slug]
+              ? { uri: categoryImages[item.slug] }
+              : Images.ic_allItem
+          }
+          style={styles.catIcon}
         />
 
         <Text

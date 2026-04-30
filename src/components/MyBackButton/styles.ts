@@ -12,13 +12,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
     paddingVertical: hp(1.5),
-    paddingHorizontal: wp(3),
+
     elevation: 2,
     gap: wp(3),
   },
   box: {
-    width: 45,
-    height: 45,
+    width: 40,
+    height: 40,
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',

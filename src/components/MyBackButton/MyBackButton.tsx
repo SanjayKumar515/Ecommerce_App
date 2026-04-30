@@ -4,9 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'react-native-paper';
 import BackIcon from '../../assets/BackIcon';
 import styles from './styles';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 interface MyBackButtonProps {
-  title: string;
+  title?: string;
 }
 
 const MyBackButton = ({ title }: MyBackButtonProps) => {
@@ -14,12 +15,12 @@ const MyBackButton = ({ title }: MyBackButtonProps) => {
   const { goBack } = useNavigation();
   const theme = useTheme();
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingHorizontal: title ? wp(3) : 0 }]}>
       <TouchableOpacity
         onPress={goBack}
         style={[styles.box, { backgroundColor: theme.colors.primary }]}
       >
-        <BackIcon width={30} height={30} />
+        <BackIcon width={28} height={28} />
       </TouchableOpacity>
 
       <Text style={styles.title}>{title}</Text>

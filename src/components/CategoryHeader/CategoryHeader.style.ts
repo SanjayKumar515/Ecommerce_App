@@ -1,8 +1,10 @@
 import { StyleSheet } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import { Fonts } from '../../constant';
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -29,8 +31,10 @@ const styles = StyleSheet.create({
   },
 
   catLabel: {
-    fontSize: 12,
+    fontSize: RFValue(10),
     textAlign: 'center',
+    color: '#000',
+    fontFamily: Fonts.SemiBold,
   },
 
   // 🔥 underline indicator
@@ -39,7 +43,7 @@ const styles = StyleSheet.create({
     height: 3,
     width: '100%',
     borderRadius: 2,
-    backgroundColor: '#2874F0', // Flipkart blue
+    backgroundColor: '#2874F0',
   },
 });
 export default styles;

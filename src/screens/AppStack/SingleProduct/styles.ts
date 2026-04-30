@@ -1,4 +1,6 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Fonts } from '../../../constant';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const styles = StyleSheet.create({
   container: {
@@ -8,15 +10,16 @@ const styles = StyleSheet.create({
   img: {
     width: '100%',
     height: 200,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
     borderRadius: 20,
   },
   title: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: RFValue(13),
+    fontFamily: Fonts.SemiBold,
   },
   price: {
-    fontSize: 18,
+    fontSize: RFValue(13),
+    fontFamily: Fonts.italic,
   },
   cardBox: {
     marginBottom: 30,
@@ -32,11 +35,11 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: Fonts.Bold,
   },
   value: {
     fontSize: 16,
-    fontWeight: '400',
+    fontFamily: Fonts.Medium,
   },
   footer: {
     marginTop: 50,
@@ -59,6 +62,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     fontSize: 30,
+    fontFamily: Fonts.Bold,
   },
 });
 

@@ -5,7 +5,6 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  SafeAreaView,
   StatusBar,
 } from 'react-native';
 import { MyBackButton } from '../../../components';
@@ -82,11 +81,13 @@ const CouponsScreen = () => {
         </View>
         <View style={styles.codeContainer}>
           <View style={styles.dashLine} />
-          <TouchableOpacity 
+          <TouchableOpacity
             style={[styles.copyBtn, { borderColor: item.color }]}
             onPress={() => {}}
           >
-            <Text style={[styles.copyBtnText, { color: item.color }]}>{item.code}</Text>
+            <Text style={[styles.copyBtnText, { color: item.color }]}>
+              {item.code}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -94,10 +95,9 @@ const CouponsScreen = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" />
+    <View style={styles.container}>
       <MyBackButton title="My Coupons" />
-      
+
       <FlatList
         data={COUPONS}
         renderItem={renderCoupon}
@@ -107,11 +107,13 @@ const CouponsScreen = () => {
         ListEmptyComponent={() => (
           <View style={styles.emptyContainer}>
             <Icon name="gift-outline" size={RFValue(60)} color="#ccc" />
-            <Text style={styles.emptyText}>No coupons available at the moment.</Text>
+            <Text style={styles.emptyText}>
+              No coupons available at the moment.
+            </Text>
           </View>
         )}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
