@@ -90,7 +90,19 @@ const styles = StyleSheet.create( {
     productPrice: {
         fontSize: RFValue( 12 ),
         fontFamily: Fonts.Bold,
-        marginTop: hp( 0.5 ),
+    },
+    priceRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+        marginTop: hp( 0.8 ),
+    },
+    wishlistIcon: {
+        position: 'absolute',
+        top: 5,
+        right: 5,
+        zIndex: 2,
     },
 } );
 

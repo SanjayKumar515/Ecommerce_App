@@ -24,6 +24,8 @@ import styles from './styles';
 import { useTranslation } from 'react-i18next';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { API } from '../../../api';
+import { toggleWishlist } from '../../../redux/features/WishlistSlice';
+import { addToCart } from '../../../redux/features/CartSlice';
 
 const FALLBACK_CAT_IMG =
   'https://cdn-icons-png.flaticon.com/512/679/679821.png';
@@ -237,28 +239,59 @@ const Home = () => {
     );
   };
 
-  const renderProduct = ({ item }: { item: any }) => (
-    <TouchableOpacity
-      style={[styles.productCard, { backgroundColor: theme.colors.surface }]}
-      onPress={() =>
-        //@ts-ignore
-        navigate('SingleProduct', { Product: item })
-      }
-    >
-      <Image source={{ uri: item.thumbnail }} style={styles.productThumb} />
-      <View style={styles.productMeta}>
-        <Text
-          style={[styles.productTitle, { color: theme.colors.onSurface }]}
-          numberOfLines={1}
+  const { wishlistData } = useSelector((state: RootState) => state.wishlist);
+
+  const renderProduct = ({ item }: { item: any }) => {
+    const isWishlisted = wishlistData.some(w => w.id === item.id);
+
+    return (
+      <TouchableOpacity
+        style={[styles.productCard, { backgroundColor: theme.colors.surface }]}
+        onPress={() =>
+          //@ts-ignore
+          navigate('SingleProduct', { Product: item })
+        }
+      >
+        <Image source={{ uri: item.thumbnail }} style={styles.productThumb} />
+
+        {/* Wishlist Icon */}
+        <TouchableOpacity
+          style={styles.wishlistIcon}
+          onPress={() => dispatch(toggleWishlist(item))}
         >
-          {item.title}
-        </Text>
-        <Text style={[styles.productPrice, { color: theme.colors.onSurface }]}>
-          ₹{item.price}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  );
+          <Icon
+            name={isWishlisted ? 'heart' : 'heart-outline'}
+            size={RFValue(18)}
+            color={isWishlisted ? '#E53935' : '#666'}
+          />
+        </TouchableOpacity>
+
+        <View style={styles.productMeta}>
+          <Text
+            style={[styles.productTitle, { color: theme.colors.onSurface }]}
+            numberOfLines={1}
+          >
+            {item.title}
+          </Text>
+          <View style={styles.priceRow}>
+            <Text
+              style={[styles.productPrice, { color: theme.colors.onSurface }]}
+            >
+              ₹{item.price}
+            </Text>
+
+            {/* Add to Cart Icon */}
+            <TouchableOpacity
+              style={styles.cartIcon}
+              onPress={() => dispatch(addToCart({ ...item, quantity: 1 }))}
+            >
+              <Icon name="add-circle" size={RFValue(22)} color="#2874F0" />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   const headerElement = useMemo(
     () => (

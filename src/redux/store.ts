@@ -5,18 +5,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import ProductsSlice from './features/ProductsSlice';
 import CartSlice from './features/CartSlice';
+import WishlistSlice from './features/WishlistSlice';
+import OrderSlice from './features/OrderSlice';
 
 const reducers = combineReducers( {
   counter: counterSlice,
   auth: AuthSlice,
   products: ProductsSlice,
   cartItems: CartSlice,
+  wishlist: WishlistSlice,
+  orders: OrderSlice,
 } );
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: [ 'auth', 'counter' ],
+  whitelist: [ 'auth', 'counter', 'cartItems', 'wishlist', 'orders' ],
 };
 
 const persistedReducer = persistReducer( persistConfig, reducers );

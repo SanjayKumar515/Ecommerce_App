@@ -11,11 +11,13 @@ import { CustomButton, MyBackButton, Skeleton } from '../../../components/index'
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../../../redux/features/CartSlice';
+import { toggleWishlist } from '../../../redux/features/WishlistSlice';
 import { AppDispatch, RootState } from '../../../redux/store';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const SingleProduct = () => {
   // states
@@ -29,6 +31,8 @@ const SingleProduct = () => {
   const { navigate } = useNavigation();
   const dispatch = useDispatch<AppDispatch>();
   const { cartData } = useSelector( ( state: RootState ) => state.cartItems );
+  const { wishlistData } = useSelector((state: RootState) => state.wishlist);
+  const isWishlisted = wishlistData.some(item => item.id === Product.id);
 
   // life cycle
   useEffect( () => {
@@ -48,6 +52,16 @@ const SingleProduct = () => {
       <MyBackButton />
       {/* Card */ }
       <View style={ styles.cardBox }>
+        <Pressable 
+          style={{ position: 'absolute', right: 20, top: 20, zIndex: 1 }}
+          onPress={() => dispatch(toggleWishlist(Product))}
+        >
+          <Icon 
+            name={isWishlisted ? "heart" : "heart-outline"} 
+            size={RFValue(24)} 
+            color={isWishlisted ? "#E53935" : "#666"} 
+          />
+        </Pressable>
         { imageLoading && (
           <Skeleton
             width={ wp( 90 ) }
@@ -63,7 +77,14 @@ const SingleProduct = () => {
         />
         <View style={ styles.textBox }>
           <Text style={ styles.title }>{ Product.title }</Text>
-          <Text style={ styles.price }>${ Product.price }</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Text style={ styles.price }>${ Product.price }</Text>
+            {Product.rating && (
+               <View style={{ backgroundColor: '#388E3C', paddingHorizontal: 8, paddingVertical: 2, borderRadius: 4 }}>
+                  <Text style={{ color: '#fff', fontSize: 12, fontWeight: 'bold' }}>{Product.rating} ★</Text>
+               </View>
+            )}
+          </View>
         </View>
         {/* body */ }
         <View style={ styles.body }>

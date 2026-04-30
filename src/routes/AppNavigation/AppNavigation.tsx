@@ -1,7 +1,14 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { Login, CounterScreen, CartScreen, SingleProduct } from '../../screens';
+import {
+  Login,
+  CartScreen,
+  SingleProduct,
+  WishlistScreen,
+  OrderScreen,
+  HelpCenterScreen,
+} from '../../screens';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -10,27 +17,29 @@ import { Colors } from '../../constant';
 
 const Stack = createNativeStackNavigator();
 
-const AppNavigation = ( { theme }: { theme: any } ) => {
-  const { userData } = useSelector( ( state: RootState ) => state.auth );
+const AppNavigation = ({ theme }: { theme: any }) => {
+  const { userData } = useSelector((state: RootState) => state.auth);
   return (
     <SafeAreaView
-      style={ { flex: 1, backgroundColor: Colors.PRIMARY[ 100 ] } }
-      edges={ [ 'top' ] }
+      style={{ flex: 1, backgroundColor: Colors.PRIMARY[100] }}
+      edges={['top']}
     >
-      <NavigationContainer theme={ theme }>
-        <Stack.Navigator screenOptions={ { headerShown: false } }>
-          { userData ? (
+      <NavigationContainer theme={theme}>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {userData ? (
             <Stack.Group>
-              <Stack.Screen name="root" component={ TabNavigation } />
-              <Stack.Screen name="SingleProduct" component={ SingleProduct } />
-              <Stack.Screen name="Cart" component={ CartScreen } />
+              <Stack.Screen name="root" component={TabNavigation} />
+              <Stack.Screen name="SingleProduct" component={SingleProduct} />
+              <Stack.Screen name="Cart" component={CartScreen} />
+              <Stack.Screen name="Wishlist" component={WishlistScreen} />
+              <Stack.Screen name="Orders" component={OrderScreen} />
+              <Stack.Screen name="HelpCenter" component={HelpCenterScreen} />
             </Stack.Group>
           ) : (
             <Stack.Group>
-              <Stack.Screen name="Login" component={ Login } />
-              <Stack.Screen name="CounterScreen" component={ CounterScreen } />
+              <Stack.Screen name="Login" component={Login} />
             </Stack.Group>
-          ) }
+          )}
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>

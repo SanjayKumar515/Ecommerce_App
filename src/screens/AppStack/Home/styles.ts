@@ -187,8 +187,25 @@ const styles = StyleSheet.create({
   productPrice: {
     fontSize: RFValue(13),
     fontFamily: Fonts.Bold,
-    marginTop: hp(0.4),
     color: Colors.PRIMARY[800],
+  },
+  priceRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: hp(0.5),
+  },
+  wishlistIcon: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    zIndex: 2,
+    backgroundColor: 'rgba(255,255,255,0.8)',
+    borderRadius: wp(5),
+    padding: wp(1),
+  },
+  cartIcon: {
+    padding: wp(1),
   },
 });
 

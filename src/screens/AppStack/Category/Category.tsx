@@ -15,6 +15,12 @@ import { Fonts } from '../../../constant';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import { Skeleton } from '../../../components';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../redux/store';
+import { addToCart } from '../../../redux/features/CartSlice';
+import { toggleWishlist } from '../../../redux/features/WishlistSlice';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const FALLBACK_IMG = 'https://cdn-icons-png.flaticon.com/512/679/679821.png';
 
@@ -141,7 +147,12 @@ const CategoryScreen = () => {
     );
   };
 
+  const dispatch = useDispatch<AppDispatch>();
+  const { wishlistData } = useSelector((state: RootState) => state.wishlist);
+
   const renderProductItem = ( { item }: { item: any } ) => {
+    const isWishlisted = wishlistData.some(w => w.id === item.id);
+
     return (
       <Pressable
         style={ [ styles.productCard, { backgroundColor: theme.colors.surface } ] }
@@ -149,15 +160,37 @@ const CategoryScreen = () => {
         onPress={ () => navigate( 'SingleProduct' as never, { Product: item } as never ) }
       >
         <Image source={ { uri: item.thumbnail } } style={ styles.productImg } />
+        
+        {/* Wishlist Icon */}
+        <Pressable 
+          style={styles.wishlistIcon}
+          onPress={() => dispatch(toggleWishlist(item))}
+        >
+          <Icon 
+            name={isWishlisted ? "heart" : "heart-outline"} 
+            size={RFValue(16)} 
+            color={isWishlisted ? "#E53935" : "#666"} 
+          />
+        </Pressable>
+
         <Text
           style={ [ styles.productTitle, { color: theme.colors.onSurface } ] }
           numberOfLines={ 2 }
         >
           { item.title }
         </Text>
-        <Text style={ [ styles.productPrice, { color: theme.colors.onSurface } ] }>
-          ₹{ item.price }
-        </Text>
+        <View style={styles.priceRow}>
+          <Text style={ [ styles.productPrice, { color: theme.colors.onSurface } ] }>
+            ₹{ item.price }
+          </Text>
+          
+          {/* Add to Cart Icon */}
+          <Pressable 
+            onPress={() => dispatch(addToCart({ ...item, quantity: 1 }))}
+          >
+            <Icon name="add-circle" size={RFValue(20)} color="#2874F0" />
+          </Pressable>
+        </View>
       </Pressable>
     );
   };

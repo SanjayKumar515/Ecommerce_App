@@ -44,9 +44,18 @@ const Account = () => {
     setLangModalVisible(true);
   };
 
-  const ShortcutItem = ({ icon, title }: { icon: string; title: string }) => (
+  const ShortcutItem = ({ 
+    icon, 
+    title, 
+    onPress 
+  }: { 
+    icon: string; 
+    title: string; 
+    onPress?: () => void;
+  }) => (
     <Pressable
       style={[styles.shortcutBtn, { backgroundColor: theme.colors.surface }]}
+      onPress={onPress}
     >
       <Icon name={icon} size={RFValue(24)} color={theme.colors.primary} />
       <Text style={[styles.shortcutTitle, { color: theme.colors.onSurface }]}>
@@ -120,10 +129,22 @@ const Account = () => {
       <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
         {/* Shortcut Grid (Orders, Wishlist, Coupons, Help) */}
         <View style={styles.shortcutsGrid}>
-          <ShortcutItem icon="cube-outline" title={t('orders')} />
-          <ShortcutItem icon="heart-outline" title={t('wishlist')} />
+          <ShortcutItem 
+            icon="cube-outline" 
+            title={t('orders')} 
+            onPress={() => navigate('Orders' as never)}
+          />
+          <ShortcutItem 
+            icon="heart-outline" 
+            title={t('wishlist')} 
+            onPress={() => navigate('Wishlist' as never)}
+          />
           <ShortcutItem icon="ticket-outline" title={t('coupons')} />
-          <ShortcutItem icon="help-circle-outline" title={t('help_center')} />
+          <ShortcutItem 
+            icon="help-circle-outline" 
+            title={t('help_center')} 
+            onPress={() => navigate('HelpCenter' as never)}
+          />
         </View>
 
         {/* Account Settings List */}
