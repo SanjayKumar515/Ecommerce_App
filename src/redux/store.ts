@@ -7,6 +7,7 @@ import ProductsSlice from './features/ProductsSlice';
 import CartSlice from './features/CartSlice';
 import WishlistSlice from './features/WishlistSlice';
 import OrderSlice from './features/OrderSlice';
+import LocationSlice from './features/LocationSlice';
 
 const reducers = combineReducers( {
   counter: counterSlice,
@@ -15,6 +16,7 @@ const reducers = combineReducers( {
   cartItems: CartSlice,
   wishlist: WishlistSlice,
   orders: OrderSlice,
+  location: LocationSlice,
 } );
 
 const persistConfig = {

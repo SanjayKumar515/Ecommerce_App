@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, Pressable } from 'react-native';
 import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import { RootState } from '../../../redux/store';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { MyBackButton } from '../../../components';
@@ -11,6 +12,7 @@ import {
 } from 'react-native-responsive-screen';
 
 const OrderScreen = () => {
+  const navigation = useNavigation();
   const { orders } = useSelector((state: RootState) => state.orders);
 
   const renderItem = ({ item }: { item: any }) => (
@@ -57,6 +59,12 @@ const OrderScreen = () => {
           Total Amount:{' '}
           <Text style={styles.totalValue}>₹{item.totalAmount}</Text>
         </Text>
+        <Pressable 
+          style={styles.trackBtn} 
+          onPress={() => navigation.navigate('DeliveryStatus' as never, { orderId: item.id } as never)}
+        >
+          <Text style={styles.trackText}>Track Order</Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -179,6 +187,18 @@ const styles = StyleSheet.create({
   },
   totalValue: {
     fontSize: RFValue(15),
+    fontWeight: 'bold',
+  },
+  trackBtn: {
+    marginTop: 10,
+    backgroundColor: '#2874F0',
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderRadius: 4,
+  },
+  trackText: {
+    color: '#fff',
+    fontSize: RFValue(12),
     fontWeight: 'bold',
   },
   emptyContainer: {

@@ -20,8 +20,8 @@ import { RFValue } from 'react-native-responsive-fontsize';
 
 const SingleProduct = () => {
   // states
-  const [currentItem, setCurrentItem] = useState<any>({});
-  const [imageLoading, setImageLoading] = useState(true);
+  const [ currentItem, setCurrentItem ] = useState<any>( {} );
+  const [ imageLoading, setImageLoading ] = useState( true );
 
   // hooks
   const {
@@ -29,127 +29,117 @@ const SingleProduct = () => {
   } = useRoute<any>();
   const { navigate } = useNavigation();
   const dispatch = useDispatch<AppDispatch>();
-  const { cartData } = useSelector((state: RootState) => state.cartItems);
-  const { wishlistData } = useSelector((state: RootState) => state.wishlist);
-  const isWishlisted = wishlistData.some(item => item.id === Product.id);
+  const { cartData } = useSelector( ( state: RootState ) => state.cartItems );
+  const { wishlistData } = useSelector( ( state: RootState ) => state.wishlist );
+  const isWishlisted = wishlistData.some( item => item.id === Product.id );
 
   // life cycle
-  useEffect(() => {
+  useEffect( () => {
     const itemChecking = () => {
       const itemAvailable = cartData?.find(
-        (value: any) => value.id === Product.id,
+        ( value: any ) => value.id === Product.id,
       );
-      if (itemAvailable) {
-        setCurrentItem(itemAvailable);
+      if ( itemAvailable ) {
+        setCurrentItem( itemAvailable );
       } else {
-        setCurrentItem({});
+        setCurrentItem( {} );
       }
     };
     itemChecking();
-  }, [cartData, Product.id]);
+  }, [ cartData, Product.id ] );
+
+
+  const fieldsData = [
+    { label: 'Category', value: Product?.category },
+    { label: 'Brand', value: Product?.brand },
+    { label: 'Description', value: Product?.description },
+    { label: 'Rating', value: `${ Product?.rating } ⭐️` },
+    { label: 'Stock', value: Product?.stock },
+  ];
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <MyBackButton />
-      {/* Card */}
-      <View style={styles.cardBox}>
+    <ScrollView style={ styles.container } showsVerticalScrollIndicator={ false }>
+      <MyBackButton title='Product Details' />
+      {/* Card */ }
+      <View style={ styles.cardBox }>
         <Pressable
-          style={{ position: 'absolute', right: 20, top: 20, zIndex: 1 }}
-          onPress={() => dispatch(toggleWishlist(Product))}
+          style={ styles.wishListBtn }
+          onPress={ () => dispatch( toggleWishlist( Product ) ) }
         >
           <Icon
-            name={isWishlisted ? 'heart' : 'heart-outline'}
-            size={RFValue(24)}
-            color={isWishlisted ? '#E53935' : '#666'}
+            name={ isWishlisted ? 'heart' : 'heart-outline' }
+            size={ RFValue( 24 ) }
+            color={ isWishlisted ? '#E53935' : '#666' }
           />
         </Pressable>
-        {imageLoading && (
+        { imageLoading && (
           <Skeleton
-            width={wp(90)}
-            height={hp(30)}
-            borderRadius={wp(4)}
-            style={{ alignSelf: 'center' }}
+            width={ wp( 90 ) }
+            height={ hp( 30 ) }
+            borderRadius={ wp( 4 ) }
+            style={ { alignSelf: 'center' } }
           />
-        )}
-        <Image
-          source={{ uri: Product.thumbnail }}
-          style={[styles.img, imageLoading && { width: 0, height: 0 }]}
-          onLoad={() => setImageLoading(false)}
-        />
-        <View style={styles.textBox}>
-          <Text style={styles.title}>{Product.title}</Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-          >
-            <Text style={styles.price}>${Product.price}</Text>
-            {Product.rating && (
-              <View
-                style={{
-                  backgroundColor: '#388E3C',
-                  paddingHorizontal: 4,
-                  paddingVertical: 1,
-                  borderRadius: 4,
-                  marginLeft: 4,
-                }}
+        ) }
+        <View style={ styles.imageBox }>
+          <Image
+            source={ { uri: Product.thumbnail } }
+            style={ [ styles.img, imageLoading && { width: 0, height: 0 } ] }
+            onLoad={ () => setImageLoading( false ) }
+          />
+
+          { Product.rating && (
+            <View
+              style={ styles.productRatingContainer }
+            >
+              <Text
+                style={ styles.starRatingText }
               >
-                <Text
-                  style={{ color: '#fff', fontSize: 12, fontWeight: 'bold' }}
-                >
-                  {Product.rating} ★
-                </Text>
-              </View>
-            )}
-          </View>
+                { Product.rating } ★
+              </Text>
+            </View>
+          ) }
         </View>
-        {/* body */}
-        <View style={styles.body}>
-          <Text style={styles.label}>
-            Category: <Text style={styles.value}>{Product.category}</Text>
-          </Text>
-          <Text style={styles.label}>
-            Brand: <Text style={styles.value}>{Product.brand}</Text>
-          </Text>
-          <Text style={styles.label}>
-            Description: <Text style={styles.value}>{Product.description}</Text>
-          </Text>
-          <Text style={styles.label}>
-            Rating: <Text style={styles.value}>{Product.rating}⭐️</Text>
-          </Text>
-          <Text style={styles.label}>
-            Stock: <Text style={styles.value}>{Product.stock}</Text>
-          </Text>
+
+        <View style={ styles.textBox }>
+          <Text style={ styles.title }>{ Product.title }</Text>
+          <Text style={ styles.price }>${ Product.price }</Text>
         </View>
-        <View style={styles.footer}>
-          {currentItem?.quantity > 0 ? (
-            <View style={styles.twoBtn}>
+        {/* body */ }
+        <View style={ styles.body }>
+          { fieldsData.map( ( item, index ) => (
+            <Text key={ index } style={ styles.label }>
+              { item.label }: <Text style={ styles.value }>{ item.value }</Text>
+            </Text>
+          ) ) }
+        </View>
+
+        <View style={ styles.footer }>
+          { currentItem?.quantity > 0 ? (
+            <View style={ styles.twoBtn }>
               <Pressable
-                style={styles.btnBox}
-                onPress={() => dispatch(removeFromCart(Product.id))}
+                style={ styles.btnBox }
+                onPress={ () => dispatch( removeFromCart( Product.id ) ) }
               >
-                <Text style={styles.btn}>-</Text>
+                <Text style={ styles.btn }>-</Text>
               </Pressable>
               <Pressable>
-                <Text style={styles.btn}>{currentItem.quantity}</Text>
+                <Text style={ styles.btn }>{ currentItem.quantity }</Text>
               </Pressable>
               <Pressable
-                style={styles.btnBox}
-                onPress={() => dispatch(addToCart(Product))}
+                style={ styles.btnBox }
+                onPress={ () => dispatch( addToCart( Product ) ) }
               >
-                <Text style={styles.btn}>+</Text>
+                <Text style={ styles.btn }>+</Text>
               </Pressable>
             </View>
           ) : (
             <CustomButton
-              onPress={() => dispatch(addToCart(Product))}
+              onPress={ () => dispatch( addToCart( Product ) ) }
               title="Add to Cart"
             />
-          )}
+          ) }
           <CustomButton
-            onPress={() => navigate('Cart' as never)}
+            onPress={ () => navigate( 'Cart' as never ) }
             title="View Cart"
           />
         </View>

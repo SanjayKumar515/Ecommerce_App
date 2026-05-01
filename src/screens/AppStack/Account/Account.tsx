@@ -1,9 +1,7 @@
 import {
   Alert,
-  Modal,
   Pressable,
   ScrollView,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
@@ -23,28 +21,28 @@ const Account = () => {
   const { navigate } = useNavigation();
   const dispatch = useDispatch<AppDispatch>();
   const theme = useTheme();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
-    Alert.alert(t('logout'), t('logout_confirm'), [
-      { text: t('cancel'), style: 'cancel' },
+    Alert.alert( t( 'logout' ), t( 'logout_confirm' ), [
+      { text: t( 'cancel' ), style: 'cancel' },
       {
-        text: t('yes_logout'),
+        text: t( 'yes_logout' ),
         onPress: () => {
-          dispatch(logout());
-          navigate('Login' as never);
+          dispatch( logout() );
+          navigate( 'Login' as never );
         },
       },
-    ]);
+    ] );
   };
 
-  const [langModalVisible, setLangModalVisible] = useState(false);
+  const [ langModalVisible, setLangModalVisible ] = useState( false );
 
   const changeLang = () => {
-    setLangModalVisible(true);
+    setLangModalVisible( true );
   };
 
-  const ShortcutItem = ({
+  const ShortcutItem = ( {
     icon,
     title,
     onPress,
@@ -52,19 +50,19 @@ const Account = () => {
     icon: string;
     title: string;
     onPress?: () => void;
-  }) => (
+  } ) => (
     <Pressable
-      style={[styles.shortcutBtn, { backgroundColor: theme.colors.surface }]}
-      onPress={onPress}
+      style={ [ styles.shortcutBtn, { backgroundColor: theme.colors.surface } ] }
+      onPress={ onPress }
     >
-      <Icon name={icon} size={RFValue(24)} color={theme.colors.primary} />
-      <Text style={[styles.shortcutTitle, { color: theme.colors.onSurface }]}>
-        {title}
+      <Icon name={ icon } size={ RFValue( 24 ) } color={ theme.colors.primary } />
+      <Text style={ [ styles.shortcutTitle, { color: theme.colors.onSurface } ] }>
+        { title }
       </Text>
     </Pressable>
   );
 
-  const ListItem = ({
+  const ListItem = ( {
     icon,
     title,
     onPress,
@@ -72,148 +70,148 @@ const Account = () => {
     icon: string;
     title: string;
     onPress?: () => void;
-  }) => (
+  } ) => (
     <Pressable
-      style={[
+      style={ [
         styles.listItem,
         { borderBottomColor: theme.colors.outlineVariant },
-      ]}
-      onPress={onPress}
+      ] }
+      onPress={ onPress }
     >
-      <View style={styles.listItemLeft}>
+      <View style={ styles.listItemLeft }>
         <Icon
-          name={icon}
-          size={RFValue(20)}
-          color={theme.colors.onSurfaceVariant}
+          name={ icon }
+          size={ RFValue( 20 ) }
+          color={ theme.colors.onSurfaceVariant }
         />
-        <Text style={[styles.listItemText, { color: theme.colors.onSurface }]}>
-          {title}
+        <Text style={ [ styles.listItemText, { color: theme.colors.onSurface } ] }>
+          { title }
         </Text>
       </View>
       <Icon
         name="chevron-forward"
-        size={RFValue(18)}
-        color={theme.colors.outline}
+        size={ RFValue( 18 ) }
+        color={ theme.colors.outline }
       />
     </Pressable>
   );
 
   return (
     <View
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      style={ [ styles.container, { backgroundColor: theme.colors.background } ] }
     >
-      {/* Top Banner (Flipkart Profile) */}
+      {/* Top Banner (Flipkart Profile) */ }
       <View
-        style={[
+        style={ [
           styles.profileHeader,
           { backgroundColor: theme.colors.surface },
-        ]}
+        ] }
       >
         <View
-          style={[styles.avatar, { backgroundColor: theme.colors.primary }]}
+          style={ [ styles.avatar, { backgroundColor: theme.colors.primary } ] }
         >
-          <Text style={styles.avatarText}>S</Text>
+          <Text style={ styles.avatarText }>S</Text>
         </View>
         <View>
-          <Text style={[styles.userName, { color: theme.colors.onSurface }]}>
+          <Text style={ [ styles.userName, { color: theme.colors.onSurface } ] }>
             Sanjay Kumar
           </Text>
           <Text
-            style={[styles.userEmail, { color: theme.colors.onSurfaceVariant }]}
+            style={ [ styles.userEmail, { color: theme.colors.onSurfaceVariant } ] }
           >
             +91 9876543210
           </Text>
         </View>
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
-        {/* Shortcut Grid (Orders, Wishlist, Coupons, Help) */}
-        <View style={styles.shortcutsGrid}>
+      <ScrollView showsVerticalScrollIndicator={ false } style={ { flex: 1 } }>
+        {/* Shortcut Grid (Orders, Wishlist, Coupons, Help) */ }
+        <View style={ styles.shortcutsGrid }>
           <ShortcutItem
             icon="cube-outline"
-            title={t('orders')}
-            onPress={() => navigate('Orders' as never)}
+            title={ t( 'orders' ) }
+            onPress={ () => navigate( 'Orders' as never ) }
           />
           <ShortcutItem
             icon="heart-outline"
-            title={t('wishlist')}
-            onPress={() => navigate('Wishlist' as never)}
+            title={ t( 'wishlist' ) }
+            onPress={ () => navigate( 'Wishlist' as never ) }
           />
           <ShortcutItem
             icon="ticket-outline"
-            title={t('coupons')}
-            onPress={() => navigate('Coupons' as never)}
+            title={ t( 'coupons' ) }
+            onPress={ () => navigate( 'Coupons' as never ) }
           />
           <ShortcutItem
             icon="help-circle-outline"
-            title={t('help_center')}
-            onPress={() => navigate('HelpCenter' as never)}
+            title={ t( 'help_center' ) }
+            onPress={ () => navigate( 'HelpCenter' as never ) }
           />
         </View>
 
-        {/* Account Settings List */}
+        {/* Account Settings List */ }
         <View
-          style={[
+          style={ [
             styles.sectionContainer,
             { backgroundColor: theme.colors.surface },
-          ]}
+          ] }
         >
           <Text
-            style={[
+            style={ [
               styles.sectionHeading,
               { color: theme.colors.onSurfaceVariant },
-            ]}
+            ] }
           >
-            {t('account_settings')}
+            { t( 'account_settings' ) }
           </Text>
-          <ListItem icon="person-outline" title={t('edit_profile')} />
-          <ListItem icon="location-outline" title={t('saved_addresses')} />
+          <ListItem icon="person-outline" title={ t( 'edit_profile' ) } />
+          <ListItem icon="location-outline" title={ t( 'saved_addresses' ) } onPress={() => navigate('SavedAddresses' as never)} />
           <ListItem
             icon="language-outline"
-            title={t('select_language')}
-            onPress={changeLang}
+            title={ t( 'select_language' ) }
+            onPress={ changeLang }
           />
           <ListItem
             icon="notifications-outline"
-            title={t('notification_settings')}
+            title={ t( 'notification_settings' ) }
           />
         </View>
 
-        {/* Payments & Legal */}
+        {/* Payments & Legal */ }
         <View
-          style={[
+          style={ [
             styles.sectionContainer,
             { backgroundColor: theme.colors.surface },
-          ]}
+          ] }
         >
           <Text
-            style={[
+            style={ [
               styles.sectionHeading,
               { color: theme.colors.onSurfaceVariant },
-            ]}
+            ] }
           >
-            {t('payments_cards')}
+            { t( 'payments_cards' ) }
           </Text>
-          <ListItem icon="wallet-outline" title={t('saved_cards_wallet')} />
+          <ListItem icon="wallet-outline" title={ t( 'saved_cards_wallet' ) } onPress={() => navigate('SavedCardsWallet' as never)} />
           <ListItem
             icon="shield-checkmark-outline"
-            title={t('privacy_policy')}
+            title={ t( 'privacy_policy' ) }
           />
         </View>
 
-        {/* Logout */}
+        {/* Logout */ }
         <Pressable
-          style={[styles.logoutBtn, { backgroundColor: theme.colors.surface }]}
-          onPress={handleLogout}
+          style={ [ styles.logoutBtn, { backgroundColor: theme.colors.surface } ] }
+          onPress={ handleLogout }
         >
-          <Text style={[styles.logoutText, { color: theme.colors.error }]}>
-            {t('logout')}
+          <Text style={ [ styles.logoutText, { color: theme.colors.error } ] }>
+            { t( 'logout' ) }
           </Text>
         </Pressable>
       </ScrollView>
       <LanguageModal
-        visible={langModalVisible}
-        onClose={() => setLangModalVisible(false)}
+        visible={ langModalVisible }
+        onClose={ () => setLangModalVisible( false ) }
       />
     </View>
   );

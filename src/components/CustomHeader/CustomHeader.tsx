@@ -13,6 +13,9 @@ import styles from './styles';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Colors } from '../../constant';
 
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+
 interface CustomHeaderProps {
   scrollY?: Animated.Value;
   searchQuery: string;
@@ -26,6 +29,7 @@ const CustomHeader: React.FC<CustomHeaderProps> = ( {
 } ) => {
   const theme = useTheme();
   const { navigate } = useNavigation();
+  const { currentAddress = 'Fetching location...' } = useSelector( ( state: RootState ) => state.location || {} );
 
   // Animations
   const topRowHeight = scrollY
@@ -82,7 +86,7 @@ const CustomHeader: React.FC<CustomHeaderProps> = ( {
               ] }
               numberOfLines={ 1 }
             >
-              Home - 123 Main Street, New York...
+              { currentAddress }
             </Text>
             <Icon
               name="chevron-down"

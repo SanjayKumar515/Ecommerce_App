@@ -35,12 +35,18 @@ const BANNERS = [
   'https://img.freepik.com/free-vector/super-sale-banner-template-design_23-2148560126.jpg',
 ];
 
+import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
+import Geolocation from 'react-native-geolocation-service';
+import { Platform } from 'react-native';
+import { setLocationStart, setLocationSuccess, setLocationError } from '../../../redux/features/LocationSlice';
+
 const Home = () => {
   const { navigate } = useNavigation();
   const dispatch = useDispatch<AppDispatch>();
   const { products, total, isMoreLoading, isLoading } = useSelector(
     (state: RootState) => state.products,
   );
+  const { currentAddress = 'Fetching location...' } = useSelector((state: RootState) => state.location || {});
   const theme = useTheme();
   const scrollY = useRef(new Animated.Value(0)).current;
   const { t } = useTranslation();
@@ -55,7 +61,68 @@ const Home = () => {
 
   useEffect(() => {
     fetchCategories();
+    handleLocationPermission();
   }, []);
+
+  const handleLocationPermission = async () => {
+    const permission = Platform.OS === 'android' 
+      ? PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION 
+      : PERMISSIONS.IOS.LOCATION_WHEN_IN_USE;
+
+    const result = await request(permission);
+    
+    if (result === RESULTS.GRANTED) {
+      fetchCurrentLocation();
+    } else {
+      dispatch(setLocationError('Permission ' + result));
+    }
+  };
+
+  const fetchCurrentLocation = () => {
+    console.log('Initiating location fetch with 1s delay...');
+    dispatch(setLocationStart());
+    
+    // Adding a delay to ensure permission state is fully propagated
+    setTimeout(() => {
+      if (!Geolocation) {
+        dispatch(setLocationError('Geolocation module not found'));
+        return;
+      }
+
+      Geolocation.getCurrentPosition(
+        async position => {
+          console.log('Position received:', position);
+          const { latitude, longitude } = position.coords;
+          try {
+            const apiKey = 'AIzaSyAPgIx_sdOWXxskpDi-kK2dGYf1yo7cTj8';
+            const response = await fetch(
+              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`,
+            );
+            const data = await response.json();
+            if (data.results && data.results.length > 0) {
+              const address = data.results[0].formatted_address;
+              dispatch(setLocationSuccess({ address, coords: { latitude, longitude } }));
+            } else {
+              dispatch(setLocationError('Address not found'));
+            }
+          } catch (error) {
+            dispatch(setLocationError('Error fetching address'));
+          }
+        },
+        error => {
+          console.log('Geolocation error code:', error.code);
+          dispatch(setLocationError(error.message));
+        },
+        { 
+          enableHighAccuracy: false, 
+          timeout: 20000, 
+          maximumAge: 10000,
+          showLocationDialog: true,
+          forceRequestLocation: true 
+        },
+      );
+    }, 1000);
+  };
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {

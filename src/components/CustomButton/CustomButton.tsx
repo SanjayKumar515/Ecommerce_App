@@ -1,4 +1,4 @@
-import { ActivityIndicator, Pressable, Text, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import styles from './styles';
 

@@ -9,6 +9,12 @@ import {
   OrderScreen,
   HelpCenterScreen,
   CouponsScreen,
+  AddressScreen,
+  PaymentScreen,
+  LocationPickerScreen,
+  DeliveryStatusScreen,
+  SavedAddressesScreen,
+  SavedCardsWalletScreen,
 } from '../../screens';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
@@ -36,6 +42,12 @@ const AppNavigation = ({ theme }: { theme: any }) => {
               <Stack.Screen name="Orders" component={OrderScreen} />
               <Stack.Screen name="HelpCenter" component={HelpCenterScreen} />
               <Stack.Screen name="Coupons" component={CouponsScreen} />
+              <Stack.Screen name="Address" component={AddressScreen} />
+              <Stack.Screen name="Payment" component={PaymentScreen} />
+              <Stack.Screen name="LocationPicker" component={LocationPickerScreen} />
+              <Stack.Screen name="DeliveryStatus" component={DeliveryStatusScreen} />
+              <Stack.Screen name="SavedAddresses" component={SavedAddressesScreen} />
+              <Stack.Screen name="SavedCardsWallet" component={SavedCardsWalletScreen} />
             </Stack.Group>
           ) : (
             <Stack.Group>

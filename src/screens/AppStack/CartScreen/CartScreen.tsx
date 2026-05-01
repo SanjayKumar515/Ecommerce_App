@@ -5,8 +5,7 @@ import {
   FlatList,
   Image,
   Pressable,
-  ScrollView,
-  Alert,
+  ScrollView
 } from 'react-native';
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,9 +13,7 @@ import { AppDispatch, RootState } from '../../../redux/store';
 import {
   addToCart,
   removeFromCart,
-  clearCart,
 } from '../../../redux/features/CartSlice';
-import { addOrder } from '../../../redux/features/OrderSlice';
 import { useNavigation } from '@react-navigation/native';
 import { API } from '../../../api';
 
@@ -43,30 +40,7 @@ const CartScreen = () => {
 
   const handlePlaceOrder = () => {
     if (cartData.length === 0) return;
-
-    const newOrder = {
-      id: Math.random().toString(36).substr(2, 9).toUpperCase(),
-      items: [...cartData],
-      totalAmount: totalAmount,
-      date: new Date().toLocaleDateString('en-IN', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-      }),
-      status: 'On the way' as const,
-    };
-    // @ts-ignore
-    dispatch(addOrder(newOrder));
-
-    Alert.alert('Success', 'Order placed successfully!', [
-      {
-        text: 'OK',
-        onPress: () => {
-          dispatch(clearCart());
-          navigation.navigate('Orders' as never);
-        },
-      },
-    ]);
+    navigation.navigate('Address' as never);
   };
 
   const renderCartItem = ({ item }: { item: any }) => (
